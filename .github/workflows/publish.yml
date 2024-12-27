@@ -15,6 +15,6 @@ jobs:
           version: 8
       - run: pnpm install
       - run: pnpm build
-      - run: git add dist
+      - run: git add -f dist
       - run: git commit -m "Build dist files [skip ci]"
       - run: git push
