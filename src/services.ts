@@ -1,4 +1,4 @@
-export const API_HOST = import.meta.env.VITE_API_URL
+export let API_HOST = undefined
 
 export async function logout(): Promise<void> {
   await authentifiedFetch(`${API_HOST}/logout`)
