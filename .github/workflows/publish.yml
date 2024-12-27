@@ -19,6 +19,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-      - run: git add -f dist
-      - run: git commit -m "Build dist files [skip ci]" # avoids GitHub from triggering another CI from this
-      - run: git push
+      - name: Commit and push changes (if any)
+        run: |
+          git add -f dist
+          git diff --cached --quiet || git commit -m "Add built dist files [skip ci]" # avoids GitHub from triggering another CI from this
+          git push || echo "No changes to push"
