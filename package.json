@@ -17,8 +17,7 @@
   ],
   "scripts": {
     "test": "vitest",
-    "build": "tsup src/index.ts --format esm,cjs --dts --minify",
-    "prepare": "pnpm build"
+    "build": "tsup src/index.ts --format esm,cjs --dts --minify"
   },
   "keywords": [],
   "author": "moliva",
