@@ -1,0 +1,23 @@
+# Node.js
+node_modules/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Dependency directories
+.vscode/
+.DS_Store
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage/
+test-results/
+
+# Build tools
+*.cache
+
