@@ -1,3 +1,4 @@
-export * from './cookies'
-export * from './types'
 export * from './auth'
+export * from './cookies'
+export * from './services'
+export * from './types'
