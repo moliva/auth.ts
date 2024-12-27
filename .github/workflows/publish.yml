@@ -18,7 +18,7 @@ jobs:
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com
+          git config user.email "github-actions[bot]@users.noreply.github.com"
       - run: git add -f dist
       - run: git commit -m "Build dist files [skip ci]" # avoids GitHub from triggering another CI from this
       - run: git push
