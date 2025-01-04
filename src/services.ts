@@ -5,7 +5,8 @@ export function setApiHost(host: string): void {
 }
 
 export async function logout(): Promise<void> {
-  await authentifiedFetch(`${AUTH_HOST}/logout`)
+  // TODO - redirect manual needed to avoid throwing error when it cannot redirect - moliva - 2025/01/04
+  await authentifiedFetch(`${AUTH_HOST}/logout`, { redirect: 'manual' })
 }
 
 let refreshing = false
@@ -26,19 +27,25 @@ export async function authentifiedFetch(url: string, init: RequestInit | undefin
 
   if (response.status === 401) {
     if (!refreshing) {
+      // enter refreshing critical section
       refreshing = true
 
       let refreshResponse
       try {
         refreshResponse = await refresh(options)
       } catch {}
-      refreshing = false
 
       if (!refreshResponse?.ok) {
         await logout()
 
+        // redirect to home page
+        location.assign('/')
+
         return response
       }
+
+      // leave refreshing critical section
+      refreshing = false
     } else {
       // wait for the token to be refreshed
       while (refreshing) {
