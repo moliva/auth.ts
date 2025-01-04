@@ -1,12 +1,21 @@
 export let AUTH_HOST: string | undefined = undefined
+let WEB_PATH: string | undefined = undefined
 
-export function setApiHost(host: string): void {
-  AUTH_HOST = host
+export type AuthConfig = {
+  api: string
+  web: string
 }
 
-export async function logout(): Promise<void> {
+export function setAuthConfig({ api, web }: AuthConfig): void {
+  AUTH_HOST = api
+  WEB_PATH = web
+}
+
+export async function logout(): Promise<Response> {
   // TODO - redirect manual needed to avoid throwing error when it cannot redirect - moliva - 2025/01/04
-  await authentifiedFetch(`${AUTH_HOST}/logout`, { redirect: 'manual' })
+  return await authentifiedFetch(`${AUTH_HOST}/logout`, {
+    redirect: 'manual'
+  })
 }
 
 let refreshing = false
@@ -39,7 +48,7 @@ export async function authentifiedFetch(url: string, init: RequestInit | undefin
         await logout()
 
         // redirect to home page
-        location.assign('/')
+        location.assign(WEB_PATH!)
 
         return response
       }
