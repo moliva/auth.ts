@@ -22,8 +22,12 @@ declare function getCookie(cname: string): string | null;
 declare function setCookie(name: string, value: string, expirationDays?: number): void;
 
 declare let AUTH_HOST: string | undefined;
-declare function setApiHost(host: string): void;
-declare function logout(): Promise<void>;
+type AuthConfig = {
+    api: string;
+    web: string;
+};
+declare function setAuthConfig({ api, web }: AuthConfig): void;
+declare function logout(): Promise<Response>;
 declare function authentifiedFetch(url: string, init?: RequestInit | undefined): Promise<Response>;
 
-export { AUTH_HOST, ID_TOKEN_COOKIE, type IdToken, type Identity, type MinAppState, authentifiedFetch, getCookie, handleAuth, logout, removeCookie, setApiHost, setCookie };
+export { AUTH_HOST, type AuthConfig, ID_TOKEN_COOKIE, type IdToken, type Identity, type MinAppState, authentifiedFetch, getCookie, handleAuth, logout, removeCookie, setAuthConfig, setCookie };
